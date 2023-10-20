@@ -20,14 +20,12 @@
 
 #include "PWGHF/DataModel/CandidateReconstructionTables.h"
 #include "PWGHF/DataModel/CandidateSelectionTables.h"
+#include "PWGHF/Utils/utilsAnalysis.h"
+#include "PWGHF/HFC/DataModel/CorrelationTables.h"
 
 using namespace o2;
 using namespace o2::framework;
 using namespace o2::framework::expressions;
-using namespace o2::aod::hf_cand_3prong;
-using namespace o2::aod::hf_correlation_ds_hadron;
-using namespace o2::analysis::hf_cuts_ds_to_k_k_pi;
-using namespace o2::constants::math;
 
 /// Returns deltaPhi value in range [-pi/2., 3.*pi/2], typically used for correlation studies
 double getDeltaPhi(double phiD, double phiHadron)
@@ -124,7 +122,7 @@ struct HfTaskCorrelationDsHadrons {
      {"hCorrel2DVsPtMcGen", stringMCParticles + stringDeltaPhi + stringDeltaEta + stringPtD + stringPoolBin + "entries", {HistType::kTHnSparseD, {{axisDetlaPhi}, {axisDetlaEta}, {axisPtD}, {axisPtHadron}, {axisPoolBin}}}}, // note: axes 3 and 4 (the pT) are updated in the init()
      {"hCorrel2DVsPtMcGenPromptDivision", stringMCParticles + stringDeltaPhi + stringDeltaEta + stringPtD + stringPtHadron + stringDsPrompt + stringPoolBin + "entries", {HistType::kTHnSparseD, {{axisDetlaPhi}, {axisDetlaEta}, {axisPtD}, {axisPtHadron}, {axisDsPrompt}, {axisPoolBin}}}}}};
 
-  void init(o2::framework::InitContext&)
+  void init(InitContext&)
   {
     // redefinition of pT axes for THnSparse holding correlation entries
     int nBinsPtAxis = binsPtCorrelations->size() - 1;
@@ -150,7 +148,7 @@ struct HfTaskCorrelationDsHadrons {
 
   void processData(DsHadronPairFull const& pairEntries)
   {
-    for (auto const& pairEntry : pairEntries) {
+    for (const auto& pairEntry : pairEntries) {
       // define variables for widely used quantities
       double deltaPhi = pairEntry.deltaPhi();
       double deltaEta = pairEntry.deltaEta();
@@ -191,7 +189,7 @@ struct HfTaskCorrelationDsHadrons {
   /// D-Hadron correlation pair filling task, from pair tables - for MC reco-level analysis (candidates matched to true signal only, but also bkg sources are studied)
   void processMcRec(DsHadronPairFull const& pairEntries)
   {
-    for (auto const& pairEntry : pairEntries) {
+    for (const auto& pairEntry : pairEntries) {
       // define variables for widely used quantities
       double deltaPhi = pairEntry.deltaPhi();
       double deltaEta = pairEntry.deltaEta();
@@ -243,7 +241,7 @@ struct HfTaskCorrelationDsHadrons {
   /// D-Hadron correlation pair filling task, from pair tables - for MC gen-level analysis (no filter/selection, only true signal)
   void processMcGen(DsHadronPairFull const& pairEntries)
   {
-    for (auto const& pairEntry : pairEntries) {
+    for (const auto& pairEntry : pairEntries) {
       // define variables for widely used quantities
       double deltaPhi = pairEntry.deltaPhi();
       double deltaEta = pairEntry.deltaEta();

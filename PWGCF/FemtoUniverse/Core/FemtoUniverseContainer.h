@@ -20,6 +20,7 @@
 #ifndef PWGCF_FEMTOUNIVERSE_CORE_FEMTOUNIVERSECONTAINER_H_
 #define PWGCF_FEMTOUNIVERSE_CORE_FEMTOUNIVERSECONTAINER_H_
 
+#include <fairlogger/Logger.h>
 #include <vector>
 #include <string>
 
@@ -134,8 +135,8 @@ class FemtoUniverseContainer
     framework::AxisSpec mTAxis3D = {mTBins3D, "#it{m}_{T} (GeV/#it{c})"};
 
     // angular correlations
-    mPhiLow = (-static_cast<int>(phiBins / 4) + 0.5) * 2. * PI / phiBins;
-    mPhiHigh = 2 * PI + (-static_cast<int>(phiBins / 4) + 0.5) * 2. * PI / phiBins;
+    mPhiLow = (-static_cast<int>(phiBins / 4) + 0.5) * 2. * o2::constants::math::PI / phiBins;
+    mPhiHigh = 2 * o2::constants::math::PI + (-static_cast<int>(phiBins / 4) + 0.5) * 2. * o2::constants::math::PI / phiBins;
     framework::AxisSpec phiAxis = {phiBins, mPhiLow, mPhiHigh};
     framework::AxisSpec etaAxis = {etaBins, -2.0, 2.0};
 
@@ -174,10 +175,10 @@ class FemtoUniverseContainer
     delta_phi = part1.phi() - part2.phi();
 
     while (delta_phi < mPhiLow) {
-      delta_phi += TwoPI;
+      delta_phi += o2::constants::math::TwoPI;
     }
     while (delta_phi > mPhiHigh) {
-      delta_phi -= TwoPI;
+      delta_phi -= o2::constants::math::TwoPI;
     }
 
     mHistogramRegistry->fill(HIST(mFolderSuffix[mEventType]) + HIST(o2::aod::femtouniverseMCparticle::MCTypeName[mc]) + HIST("/relPairDist"), femtoObs);
@@ -244,7 +245,7 @@ class FemtoUniverseContainer
           }
           const float mTMC = FemtoUniverseMath::getmT(part1.fdMCParticle(), mMassOne, part2.fdMCParticle(), mMassTwo);
 
-          if (abs(part1.fdMCParticle().pdgMCTruth()) == mPDGOne && abs(part2.fdMCParticle().pdgMCTruth()) == mPDGTwo) { // Note: all pair-histogramms are filled with MC truth information ONLY in case of non-fake candidates
+          if (abs(part1.fdMCParticle().pdgMCTruth()) == abs(mPDGOne) && abs(part2.fdMCParticle().pdgMCTruth()) == abs(mPDGTwo)) { // Note: all pair-histogramms are filled with MC truth information ONLY in case of non-fake candidates
             setPair_base<o2::aod::femtouniverseMCparticle::MCType::kTruth>(femtoObsMC, mTMC, part1.fdMCParticle(), part2.fdMCParticle(), mult, use3dplots);
             setPair_MC(femtoObsMC, femtoObs, mT, mult);
           } else {
