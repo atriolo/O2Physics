@@ -561,19 +561,18 @@ struct NonPromptCascadeTask {
       fillDauDCA(trackedCascade, bachelor, protonTrack, pionTrack, primaryVertex, isOmega, dDCA);
 
       candidates.emplace_back(NPCascCandidate{static_cast<int>(track.globalIndex()),
-                                            track.pt(), track.eta(), track.phi(),
-                                            mDCA.DCAxy, mDCA.DCAz, dDCA.protonDCAxy, dDCA.protonDCAz, dDCA.pionDCAxy, dDCA.pionDCAz, dDCA.bachDCAxy, dDCA.bachDCAz,
-                                            cascCpa, v0Cpa,
-                                            massXi, massOmega, v0mass,
-                                            std::hypot(trackedCascade.decayX(), trackedCascade.decayY()), std::hypot(v0Pos[0], v0Pos[1]), std::hypot(trackedCascade.decayX(), trackedCascade.decayY(), trackedCascade.decayZ()), std::hypot(v0Pos[0], v0Pos[1], v0Pos[2]),
-                                            track.itsNCls(), protonTrack.itsNCls(), pionTrack.itsNCls(), bachKaonNClusITS, bachPionNClusITS, protonTrack.tpcNClsFound(), pionTrack.tpcNClsFound(), bachKaonNClusTPC, bachPionNClusTPC,
-                                            protonTrack.tpcNSigmaPr(), pionTrack.tpcNSigmaPi(), bachelor.tpcNSigmaKa(), bachelor.tpcNSigmaPi(),
-                                            protonTrack.hasTOF(), pionTrack.hasTOF(), bachKaonHasTOF, bachPionHasTOF,
-                                            protonTrack.tofNSigmaPr(), pionTrack.tofNSigmaPi(), bachelor.tofNSigmaKa(), bachelor.tofNSigmaPi()});
+                                              track.pt(), track.eta(), track.phi(),
+                                              mDCA.DCAxy, mDCA.DCAz, dDCA.protonDCAxy, dDCA.protonDCAz, dDCA.pionDCAxy, dDCA.pionDCAz, dDCA.bachDCAxy, dDCA.bachDCAz,
+                                              cascCpa, v0Cpa,
+                                              massXi, massOmega, v0mass,
+                                              std::hypot(trackedCascade.decayX(), trackedCascade.decayY()), std::hypot(v0Pos[0], v0Pos[1]), std::hypot(trackedCascade.decayX(), trackedCascade.decayY(), trackedCascade.decayZ()), std::hypot(v0Pos[0], v0Pos[1], v0Pos[2]),
+                                              track.itsNCls(), protonTrack.itsNCls(), pionTrack.itsNCls(), bachKaonNClusITS, bachPionNClusITS, protonTrack.tpcNClsFound(), pionTrack.tpcNClsFound(), bachKaonNClusTPC, bachPionNClusTPC,
+                                              protonTrack.tpcNSigmaPr(), pionTrack.tpcNSigmaPi(), bachelor.tpcNSigmaKa(), bachelor.tpcNSigmaPi(),
+                                              protonTrack.hasTOF(), pionTrack.hasTOF(), bachKaonHasTOF, bachPionHasTOF,
+                                              protonTrack.tofNSigmaPr(), pionTrack.tofNSigmaPi(), bachelor.tofNSigmaKa(), bachelor.tofNSigmaPi()});
 
     } // end loop over tracked cascades
 
-    
     for (auto& c : candidates) {
       auto label = trackLabelsMC.iteratorAt(c.globalIndex);
       if (label.mcParticleId() < -1 || label.mcParticleId() >= mcParticles.size()) {
