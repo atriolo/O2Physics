@@ -418,7 +418,7 @@ struct NonPromptCascadeTask {
       }
 
       // PV
-      registry.fill(HIST("h_PV_x"), primaryVertex.getX()); 
+      registry.fill(HIST("h_PV_x"), primaryVertex.getX());
       registry.fill(HIST("h_PV_y"), primaryVertex.getY());
       registry.fill(HIST("h_PV_z"), primaryVertex.getZ());
 
@@ -659,7 +659,7 @@ struct NonPromptCascadeTask {
       }
 
       // PV
-      registry.fill(HIST("h_PV_x"), primaryVertex.getX()); 
+      registry.fill(HIST("h_PV_x"), primaryVertex.getX());
       registry.fill(HIST("h_PV_y"), primaryVertex.getY());
       registry.fill(HIST("h_PV_z"), primaryVertex.getZ());
 
