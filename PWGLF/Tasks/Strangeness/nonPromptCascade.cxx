@@ -591,7 +591,7 @@ struct NonPromptCascadeTask {
         }
       }
 
-      candidates.emplace_back(NPCascCandidate{track.globalIndex(), ITStrack.globalIndex(), trackedCascade.matchingChi2(), isGoodMatch, isGoodCascade,pdgCodePrimary,
+      candidates.emplace_back(NPCascCandidate{track.globalIndex(), ITStrack.globalIndex(), trackedCascade.matchingChi2(), isGoodMatch, isGoodCascade, pdgCodePrimary,
                                               primaryVertex.getX(), primaryVertex.getY(), primaryVertex.getZ(),
                                               track.pt(), track.eta(), track.phi(),
                                               protonTrack.pt(), protonTrack.eta(), pionTrack.pt(), pionTrack.eta(), bachelor.pt(), bachelor.eta(),
@@ -618,7 +618,7 @@ struct NonPromptCascadeTask {
       auto particle = mcParticles.iteratorAt(mcParticleId[i]);
       auto& c = candidates[i];
 
-      NPCTableMC(c.matchingChi2, c.isGoodMatch, c.isGoodCascade,c.pdgCodePrimary,
+      NPCTableMC(c.matchingChi2, c.isGoodMatch, c.isGoodCascade, c.pdgCodePrimary,
                  c.pvX, c.pvY, c.pvZ,
                  c.cascPt, c.cascEta, c.cascPhi,
                  c.protonPt, c.protonEta, c.pionPt, c.pionEta, c.bachPt, c.bachEta,
