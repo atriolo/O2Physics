@@ -446,7 +446,7 @@ struct NonPromptCascadeTask {
       momenta[1] = {pionTrack.px(), pionTrack.py(), pionTrack.pz()};
       const auto v0mass = RecoDecay::m(momenta, masses);
 
-      invMassBCOmega->Fill(massOmega);      
+      invMassBCOmega->Fill(massOmega);
 
       invMassBCXi->Fill(massXi);
       invMassBCV0->Fill(v0mass);
@@ -458,7 +458,7 @@ struct NonPromptCascadeTask {
       int bachPionNClusTPC = -1;
       int bachKaonNClusITS = -1;
       int bachPionNClusITS = -1;
-     
+
       bachPionNClusTPC = bachelor.tpcNClsFound(); /// by default cascade = Xi
       bachPionNClusITS = bachelor.itsNCls();      /// by default cascade = Xi
 
